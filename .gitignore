@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+dags/data
+dags/data/movie_review.csv
+logs/scheduler/latest
+.vscode
