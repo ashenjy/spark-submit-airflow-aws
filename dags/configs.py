@@ -1,5 +1,5 @@
 # Configurations
-BUCKET_NAME = ""
+BUCKET_NAME = "my-bucket-ashen"
 LOCAL_DATA = "./dags/data/movie_review.csv"
 S3_DATA = "data/movie_review.csv"
 LOCAL_SCRIPT = "./dags/scripts/spark/random_text_classification.py"

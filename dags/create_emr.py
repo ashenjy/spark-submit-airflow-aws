@@ -1,4 +1,6 @@
 from airflow.contrib.operators.emr_create_job_flow_operator import ( EmrCreateJobFlowOperator ) 
+from init_dag import dag
+
 
 JOB_FLOW_OVERRIDES = {
     "Name": "Movie review classifier",

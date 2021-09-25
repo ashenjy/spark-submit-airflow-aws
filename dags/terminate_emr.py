@@ -1,6 +1,8 @@
 from airflow.contrib.operators.emr_terminate_job_flow_operator import (
     EmrTerminateJobFlowOperator,
 )
+from init_dag import dag
+
 
 # Terminate the EMR cluster
 terminate_emr_cluster = EmrTerminateJobFlowOperator(

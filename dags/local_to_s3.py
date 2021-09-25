@@ -1,6 +1,8 @@
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from airflow.operators.python_operator import PythonOperator
 from configs import *
+from init_dag import dag
+
 
 # helper function
 def local_to_s3(filename, key, bucket_name=BUCKET_NAME):
