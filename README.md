@@ -1,2 +1,10 @@
 # spark-submit-airflow-aws
-Python, Spark Submit, Airflow, AWS S3, AWS EMR
+
+## Tech:
+Python, PySpark, Airflow, AWS S3, AWS EMR
+
+## Movie review classifier
+1. clean input data
+2. use a pre-trained model to make prediction 
+3. write predictions to a HDFS output
+
