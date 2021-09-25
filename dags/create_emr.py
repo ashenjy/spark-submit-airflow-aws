@@ -1,18 +1,20 @@
-from airflow.contrib.operators.emr_create_job_flow_operator import ( EmrCreateJobFlowOperator ) 
-from init_dag import dag
+from airflow.contrib.operators.emr_create_job_flow_operator import (
+    EmrCreateJobFlowOperator)
 
 
 JOB_FLOW_OVERRIDES = {
     "Name": "Movie review classifier",
     "ReleaseLabel": "emr-5.29.0",
-    "Applications": [{"Name": "Hadoop"}, {"Name": "Spark"}], # We want our EMR cluster to have HDFS and Spark
+    # We want our EMR cluster to have HDFS and Spark
+    "Applications": [{"Name": "Hadoop"}, {"Name": "Spark"}],
     "Configurations": [
         {
             "Classification": "spark-env",
             "Configurations": [
                 {
                     "Classification": "export",
-                    "Properties": {"PYSPARK_PYTHON": "/usr/bin/python3"}, # by default EMR uses py2, change it to py3
+                    # by default EMR uses py2, change it to py3
+                    "Properties": {"PYSPARK_PYTHON": "/usr/bin/python3"},
                 }
             ],
         }
@@ -28,24 +30,26 @@ JOB_FLOW_OVERRIDES = {
             },
             {
                 "Name": "Core - 2",
-                "Market": "SPOT", # Spot instances are a "use as available" instances
+                "Market": "SPOT",  # Spot instances are a "use as available" instances
                 "InstanceRole": "CORE",
                 "InstanceType": "m4.xlarge",
                 "InstanceCount": 2,
             },
         ],
         "KeepJobFlowAliveWhenNoSteps": True,
-        "TerminationProtected": False, # this lets us programmatically terminate the cluster
+        "TerminationProtected": False,  # this lets us programmatically terminate the cluster
     },
     "JobFlowRole": "EMR_EC2_DefaultRole",
     "ServiceRole": "EMR_DefaultRole",
 }
 
+
 #  Create an EMR Cluster
-create_emr_cluster = EmrCreateJobFlowOperator(
-    task_id = "create_emr_cluster",
-    job_flow_overrides= JOB_FLOW_OVERRIDES,
-    aws_conn_id="aws_default",
-    emr_conn_id="aws_default",
-    dag=dag
-)
+def create_emr_cluster(dag):
+    return EmrCreateJobFlowOperator(
+        task_id="create_emr_cluster",
+        job_flow_overrides=JOB_FLOW_OVERRIDES,
+        aws_conn_id="aws_default",
+        emr_conn_id="aws_default",
+        dag=dag
+    )
