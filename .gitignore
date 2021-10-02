@@ -131,3 +131,5 @@ dags/data
 dags/data/movie_review.csv
 logs/scheduler/latest
 .vscode
+.idea
+.idea/modules.xml
